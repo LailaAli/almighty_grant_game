@@ -1,3 +1,5 @@
+(function(){
+
 //Declare Variables
 
 var userName;
@@ -16,14 +18,33 @@ var keepPlaying = true; //Game Kill Switch
 
 function startGame() {
   
-  initiateCombat = prompt('Do you want to fight against the mighty Grant Chirpus? (Yes or No)');
+  do {
+    initiateCombat = prompt('Do you want to fight against the mighty Grant Chirpus? (Yes or No)');
+  } while (initiateCombat !== "Yes" && initiateCombat !== "No")
+
 		if (initiateCombat === "Yes") {
-		    userName = prompt('What is your name valiant hero?');
-		  } else {
-		    console.log("I see, return here when you have prepared.");
-			  keepPlaying = false;
-			}
+		    validateUserName ();
 		}
+
+    if (initiateCombat === "No") {
+		    alert ("I see, return here when you have prepared.");
+        //console.log("I see, return here when you have prepared.");
+			  keepPlaying = false;
+		} 
+}
+
+//Validate User Name Function
+
+function validateUserName () {
+  
+  userName = prompt('Please, tell us your name brave hero! The fate of our land depends on it!');
+
+  if (userName === null) {
+    alert ("Oh, you have no name? You must be a ghost. Return when you have restored your spirit to a flesh body.");
+        //console.log("I see, return here when you have prepared.");
+        keepPlaying = false;
+  }
+}
 
 //Game Loop Function
 
@@ -39,11 +60,15 @@ function gameLoop () {
 //Combat Loop function
 
 function combatLoop () {//Nested into gameLoop
-  
+
   while (userHealth > 0 && grantHealth > 0 && keepPlaying) {
     
-    console.log (userName + " has " + userHealth + " HP left!");
-    console.log (grant + " has " + grantHealth + " HP left!");
+    if (grantHealth === 10) {
+      alert (userName + ' has ' + userHealth + ' HP, and ' + grant + " has " + grantHealth + " HP! Attack!");
+    }
+
+    //console.log (userName + " has " + userHealth + " HP left!");
+    //console.log (grant + " has " + grantHealth + " HP left!");
       
     var grantAttack = getRandomInt();
     var userAttack = getRandomInt();
@@ -55,14 +80,18 @@ function combatLoop () {//Nested into gameLoop
 
     //continueGame = window.confirm('Attack!');
     
-    continueGame = window.confirm(userName + ' has ' + userHealth + ' HP left! ' + grant + " has " + grantHealth + " HP left! Attack again?");
-        
-    if (continueGame === true) {
-        console.log ('You attacked!');
-      } else {
-        console.log ('You have fled the battle!');
-        keepPlaying = false;
-      }
+    if (userHealth > 0 && grantHealth > 0) {
+
+        continueGame = window.confirm(userName + ' has ' + userHealth + ' HP left! ' + grant + " has " + grantHealth + " HP left! Click Ok to attack again, or Cancel to flee!");
+            
+        if (continueGame === true) {
+            console.log ('You attacked!');
+          } else {
+            alert ('You have fled the battle!');
+            //console.log ('You have fled the battle!');
+            keepPlaying = false;
+          }
+    }
   }
 }
 
@@ -72,17 +101,20 @@ function roundEndCheck () {//Nested into gameLoop
     
     if (keepPlaying) {
       if (userHealth > 0 && userWins < 2) { //User Wins Round, Game Continues
-          console.log (userName + " Stunned Grant Chirpus! Keep fighting!");
           userWins++;
+          //console.log (userName + " Stunned Grant Chirpus! His minion used a potion and restored his HP to 10. Keep fighting!");
+          alert (userName + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-userWins) + " more time(s) until he is vanquished. Keep fighting!");
           grantHealth = 10;
           
         } else if (userHealth > 0 && userWins === 2) { // User Wins Game
           userWins++;
-          console.log ("Congratulations, you have defeated Grant Chirpus!");
+          alert ("Congratulations, you have defeated Grant Chirpus!");
+          //console.log ("Congratulations, you have defeated Grant Chirpus!");
           keepPlaying = false;
           
         } else { //User Health is 0 -> End Game
-          console.log ("Grant Chirpus has killed you. Game Over.");
+          alert ("Grant Chirpus has killed you. Game Over.");
+          //console.log ("Grant Chirpus has killed you. Game Over.");
           keepPlaying = false;
         }
     }
@@ -104,3 +136,5 @@ function getRandomInt() {//Nested into combatLoop
 
 startGame ();
 gameLoop ();
+
+})();
