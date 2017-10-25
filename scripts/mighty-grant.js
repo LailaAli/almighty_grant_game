@@ -12,7 +12,10 @@ var continueGame;
 
 var keepPlaying = true; //Game Kill Switch
 
+
+
 //Start Game Function
+
 
 function startGame() {
   
@@ -30,6 +33,7 @@ function startGame() {
 function gameLoop () {
   
   while (keepPlaying === true) {
+    debugger;
     
       combatLoop ();
       roundEndCheck ();
@@ -41,7 +45,7 @@ function gameLoop () {
 function combatLoop () {//Nested into gameLoop
   
   while (userHealth > 0 && grantHealth > 0 && keepPlaying) {
-    
+    debugger;
     console.log (userName + " has " + userHealth + " HP left!");
     console.log (grant + " has " + grantHealth + " HP left!");
       
@@ -104,3 +108,5 @@ function getRandomInt() {//Nested into combatLoop
 
 startGame ();
 gameLoop ();
+
+
