@@ -8,12 +8,39 @@ var continueGame;
 
 var keepPlaying = true; //Game Kill Switch
 
-var grant = 'Grant Chirpus';
+var grant = {
+  name: "Grant Chirpus",
+  health: 10,
+  wins: 0,
+  attack() {
+    var attackPower = getRandomInt(1,5);
+    return attackPower;
+  }
+}
 
+var user = {
+  name: null,
+  health: 40,
+  lives: 1,
+  healCount: 0,
+  wins: 0,
+  heal() {
+    var healPower = getRandomInt(1,10);
+    return healPower;
+  },
+  attack() {
+    var attackPower = getRandomInt(1,3);
+    return attackPower;
+  }
+}
+
+//var grant = 'Grant Chirpus';
+
+/*
 var grantHealth = 10;
 var userHealth = 40;
 var userWins = 0;
-
+*/
 
 //Start Game Function
 
@@ -38,9 +65,9 @@ function startGame() {
 
 function validateUserName () {
   
-  userNameInput = prompt('Please, tell us your name brave hero! The fate of our land depends on it!');
+  user.name = prompt('Please, tell us your name brave hero! The fate of our land depends on it!');
 
-  if (userNameInput === null) {
+  if (user.name === null) {
     alert ("Oh, you have no name? You must be a ghost. Return when you have restored your spirit to a flesh body.");
         //console.log("I see, return here when you have prepared.");
         keepPlaying = false;
@@ -62,36 +89,53 @@ function gameLoop () {
 
 function combatLoop () {//Nested into gameLoop
 
-  while (userHealth > 0 && grantHealth > 0 && keepPlaying) {
+  while (user.health > 0 && grant.health > 0 && keepPlaying) {
     
-    if (grantHealth === 10) {
-      alert (userName + ' has ' + userHealth + ' HP, and ' + grant + " has " + grantHealth + " HP! Attack!");
+    if (grant.health === 10) {
+      alert (user.name + ' has ' + user.health + ' HP, and ' + grant.name + " has " + grant.health + " HP! Attack!");
     }
 
     //console.log (userName + " has " + userHealth + " HP left!");
     //console.log (grant + " has " + grantHealth + " HP left!");
       
-    var grantAttack = getRandomInt();
-    var userAttack = getRandomInt();
+    //var grantAttack = getRandomInt();
+    //var userAttack = getRandomInt();
     
-    grantHealth = grantHealth - userAttack;
-    userHealth = userHealth - grantAttack;
+    // grant.health = grant.health - user.attack();
+    // user.health = user.health - grant.attack();
     
     //User Attack Prompt Attempt 1
 
     //continueGame = window.confirm('Attack!');
     
-    if (userHealth > 0 && grantHealth > 0) {
+    if (user.health > 0 && grant.health > 0) {
 
-        continueGame = window.confirm(userName + ' has ' + userHealth + ' HP left! ' + grant + " has " + grantHealth + " HP left! Click Ok to attack again, or Cancel to flee!");
+        do {
+          continueGame = prompt(user.name + ' has ' + user.health + ' HP left! ' + grant.name + " has " + grant.health + " HP left! Would you like to Attack, Heal, or Run?");
+        } while (continueGame !== "Attack" && continueGame !== "Heal" && continueGame !== "Run");
             
-        if (continueGame === true) {
-            console.log ('You attacked!');
+        if (continueGame === "Attack") {
+          alert ('You attacked! Grant attacks you back!');
+          grant.health = grant.health - user.attack();
+          user.health = user.health - grant.attack();
+        }
+
+        if (continueGame === "Heal") { //TO FINISH LATER
+          if (user.healCount < 2) {
+            var roundHealthIncrease = user.heal();
+            user.health = user.health + roundHealthIncrease;
+            user.healCount++;
+            alert("You have used a health potion! It increased your HP by " + roundHealthIncrease + ". You have " + (2-user.healCount) + " potion(s) left!");
           } else {
+            alert("You are out of potions! You can no longer Heal.");
+          }
+        }
+
+        if (continueGame === "Run") {
             alert ('You have fled the battle!');
             //console.log ('You have fled the battle!');
             keepPlaying = false;
-          }
+        }
     }
   }
 }
@@ -101,14 +145,14 @@ function combatLoop () {//Nested into gameLoop
 function roundEndCheck () {//Nested into gameLoop
     
     if (keepPlaying) {
-      if (userHealth > 0 && userWins < 2) { //User Wins Round, Game Continues
-          userWins++;
+      if (user.health > 0 && user.wins < 2) { //User Wins Round, Game Continues
+          user.wins++;
           //console.log (userName + " Stunned Grant Chirpus! His minion used a potion and restored his HP to 10. Keep fighting!");
-          alert (userName + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-userWins) + " more time(s) until he is vanquished. Keep fighting!");
-          grantHealth = 10;
+          alert (user.name + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-user.wins) + " more time(s) until he is vanquished. Keep fighting!");
+          grant.health = 10;
           
-        } else if (userHealth > 0 && userWins === 2) { // User Wins Game
-          userWins++;
+        } else if (user.health > 0 && user.wins === 2) { // User Wins Game
+          user.wins++;
           alert ("Congratulations, you have defeated Grant Chirpus!");
           //console.log ("Congratulations, you have defeated Grant Chirpus!");
           keepPlaying = false;
@@ -123,9 +167,7 @@ function roundEndCheck () {//Nested into gameLoop
 
 //Random Number Generator
 
-function getRandomInt() {//Nested into combatLoop
-  var min = 0;
-  var max = 5;
+function getRandomInt(min, max) {//Nested into combatLoop
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
