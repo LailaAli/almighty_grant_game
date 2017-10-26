@@ -1,10 +1,6 @@
 (function(){
 
 //Declare Variables
-var userNameInput;
-
-var initiateCombat;
-var continueGame;
 
 var keepPlaying = true; //Game Kill Switch
 
@@ -46,6 +42,8 @@ var userWins = 0;
 
 function startGame() {
   
+  var initiateCombat;
+
   do {
     initiateCombat = prompt('Do you want to fight against the mighty Grant Chirpus? (Yes or No)');
   } while (initiateCombat !== "Yes" && initiateCombat !== "No")
@@ -76,38 +74,27 @@ function validateUserName () {
 
 //Game Loop Function
 
-function gameLoop () {
+function gameLoop() {
   
   while (keepPlaying === true) {
     
-      combatLoop ();
-      roundEndCheck ();
+      combatLoop();
+      roundEndCheck();
   }
 }
 
 //Combat Loop function
 
-function combatLoop () {//Nested into gameLoop
+function combatLoop() {//Nested into gameLoop
+
+  var continueGame;
 
   while (user.health > 0 && grant.health > 0 && keepPlaying) {
     
     if (grant.health === 10) {
-      alert (user.name + ' has ' + user.health + ' HP, and ' + grant.name + " has " + grant.health + " HP! Attack!");
+      alert(user.name + ' has ' + user.health + ' HP, and ' + grant.name + " has " + grant.health + " HP! Attack!");
     }
-
-    //console.log (userName + " has " + userHealth + " HP left!");
-    //console.log (grant + " has " + grantHealth + " HP left!");
       
-    //var grantAttack = getRandomInt();
-    //var userAttack = getRandomInt();
-    
-    // grant.health = grant.health - user.attack();
-    // user.health = user.health - grant.attack();
-    
-    //User Attack Prompt Attempt 1
-
-    //continueGame = window.confirm('Attack!');
-    
     if (user.health > 0 && grant.health > 0) {
 
         do {

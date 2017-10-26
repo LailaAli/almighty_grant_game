@@ -2,19 +2,38 @@
 <html>
 
     <head>
-        <title>Mighty Grant Chirpus</title>
+        <title>Fight Grant Chirpus!</title>
         <meta name="viewport" content=”width=device-width, initial-scale=1”>
-        <link rel="stylesheet" type="text/css" href="css/style.css">
-
+        <link rel="stylesheet" type="text/css" href="style.css">
     </head>
 
 
-    <body>
+    <body style="background-color: yellow">
 
-    	<h1>JS Lab 1</h1>
+   
+	    	<div class="gameViewConsole">
+	    		<h1>OMEGA GRANT CHIRPUS</h1>
+				<div id="gameTextDisplay">
+					<p>Text Log of Game Events</p>
+				</div>
+			</div>
 
+			<div class="buttonContainer">
+	    		<button id="attackButton">Attack</button>
+	    		<button id="healButton">Heal</button>
+	    		<button id="fleeButton">Flee</button>
+	    	</div>
 
-        <script src="scripts/mighty_grant_labpt3.js"></script>
+	    	<div class="statsContainer">
+	    		<div class="statsCounters">
+		    		<h2 class="statDisplay" id="playerHealth">40</h2>
+		    		<h2 class="statDisplay" id="playerHealCounter">0</h2>
+		    		<h2 class="statDisplay" id="roundsWon">0</h2>
+		    		<h2 class="statDisplay" id="grantHealthCounter">10</h2>
+		    	</div>
+	    	</div>
+
+        <script src="scripts/javascriptlabpart4.js"></script>
 
     </body>
 

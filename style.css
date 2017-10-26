@@ -1,0 +1,76 @@
+/*Colors and Fonts*/
+
+@font-face {
+	font-family: "04B_30";
+	src: url("fonts/04B_30__.TTF");
+} 
+
+h1, h2 {
+	font-family: "04B_30";
+}
+
+#attackButton, #healButton, #fleeButton {
+	font-family: "04B_30";
+	font-size: 1.5em;
+	color: black;
+	border: none;
+	border-radius: 10px;
+	padding: 10px 20px;
+	margin: 0px 20px;
+	box-shadow: 0px 3px 0px black;
+}
+
+#attackButton {
+	background-color: #01BAEF;
+}
+
+#healButton {
+	background-color: #EC0868;
+}
+
+#fleeButton {
+	background-color: #FC2F00;
+}
+
+#gameTextDisplay {
+	width: 480px;
+	height: 100px;
+	font-family: "04B_30";
+	border-style: solid;
+	border-color: : white;
+	border-radius: 10px;
+	text-align: center;
+	;
+}
+
+/*Layout*/
+
+.gameViewConsole {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 50px;
+}
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 40px
+}
+
+.statsContainer {
+	display: flex;
+	justify-content: center;
+}
+
+.statsCounters {
+	width: 480px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}
+
+.statDisplay {
+	font-size: 1.5em;
+}
+	
