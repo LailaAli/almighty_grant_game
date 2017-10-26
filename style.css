@@ -1,9 +1,16 @@
 /*Colors and Fonts*/
 
-@font-face {
+/*Headline*/
+@font-face { 
 	font-family: "04B_30";
 	src: url("fonts/04B_30__.TTF");
 } 
+
+/*Body*/
+@font-face {
+	font-family: "PressStart2P";
+	src: url("fonts/PressStart2P.ttf");
+}
 
 h1, h2 {
 	font-family: "04B_30";
@@ -33,14 +40,25 @@ h1, h2 {
 }
 
 #gameTextDisplay {
-	width: 480px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	padding: 20px;
+	width: 440px;
 	height: 100px;
-	font-family: "04B_30";
+
+	font-family: "PressStart2P";
 	border-style: solid;
 	border-color: : white;
+	font-size: 0.9em;
+	line-height: 1.25em;
 	border-radius: 10px;
 	text-align: center;
-	;
+}
+
+.statDisplay {
+	font-size: 1.5em;
 }
 
 /*Layout*/
@@ -60,17 +78,6 @@ h1, h2 {
 
 .statsContainer {
 	display: flex;
-	justify-content: center;
-}
-
-.statsCounters {
-	width: 480px;
-	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	align-items: space-around;
 }
-
-.statDisplay {
-	font-size: 1.5em;
-}
-	

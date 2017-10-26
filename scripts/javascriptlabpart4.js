@@ -1,4 +1,4 @@
-//(function(){
+(function(){
 
 var keepPlaying = true; //Game Kill Switch
 
@@ -16,7 +16,7 @@ var player = {
     name: null,
     health: 40,
     lives: 1,
-    healCount: 0,
+    healCount: 2,
     wins: 0,
     heal() {
       var healPower = getRandomInt(1,10);
@@ -43,10 +43,11 @@ fleeButton.onclick = function() {
 	startCombat("flee");
 };
 
-
 function startCombat(attackHealorRun) {
 
 	var gameTextDisplay = document.getElementById('gameTextDisplay');
+	var grantHealthCounter = document.getElementById("grantHealthCounter");
+    var playerRoundsWon = document.getElementById("playerRoundsWon");
 
 	if (attackHealorRun === "attack") {//If the user clicked attack
       
@@ -63,18 +64,26 @@ function startCombat(attackHealorRun) {
 		fleeRound();
 	}
 
-
 	if (player.health <= 0 || grant.health <=  0) {
 
       if (player.health > 0 && player.wins < 2) { //User Wins Round, Game Continues
-          var grantHealthCounter = document.getElementById("grantHealthCounter");
+          
+          //increase roundswon and replenish grant 
           player.wins++;
-          gameTextDisplay.innerHTML = "Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. What now?";
           grant.health = 10;
+
+          //update display stats
+          grantHealthCounter.innerHTML = grant.health;
+          playerRoundsWon.innerHTML = player.wins;
+
+          //send message to user in window
+          gameTextDisplay.innerHTML = "You stunned Grant Chirpus! However, his minion uses a potion and restores his HP to 10. What will you do?";
           
         } else if (player.health > 0 && player.wins === 2) { // User Wins Game
-          player.wins++;
-          alert ("Congratulations, you have defeated Grant Chirpus!");
+          grantHealthCounter.innerHTML = 0; //display Grant as dead
+          player.wins++; //Add final win
+          gameTextDisplay.innerHTML = "Congratulations, you have defeated Grant Chirpus! Peace may now fall across this land once more.";
+          playerRoundsWon.innerHTML = player.wins;
           keepPlaying = false;
           
         } else { //User Health is 0 -> End Game
@@ -85,9 +94,8 @@ function startCombat(attackHealorRun) {
 }
 
 
-
 function attackRound() {
-	
+
 	// alert("you clicked attack");
 
 	var grantHealthCounter = document.getElementById("grantHealthCounter");
@@ -98,27 +106,33 @@ function attackRound() {
     player.health = player.health - grant.attack();
     playerHealthCounter.innerHTML = player.health;
 
-    gameTextDisplay.innerHTML = "You attacked! Grand Attacked back! What now?";
+    gameTextDisplay.innerHTML = "You attacked! Grant Attacked back! What now?";
 }
 
 
 function healRound() {
 
-	//define locations
-	var playerHealthCounter = document.getElementById("playerHealth");
-	var playerHealCounter = document.getElementById("playerHealCounter");
-	
-	//add health and log to DOM
-	player.health = player.health + player.heal();
-	playerHealth.innerHTML = player.health;
-	
-	//increase count
-	player.healCount++;
+	if (player.healCount > 0) {
 
-	//log heal count to DOM
-	playerHealCounter.innerHTML = player.healCount;
-	gameTextDisplay.innerHTML = "You used a heal potion. You have " + (2-player.healCount + " potion left. What now?");
+		//define locations
+		var playerHealthCounter = document.getElementById("playerHealth");
+		var playerHealCounter = document.getElementById("playerHealCounter");
 
+		//add health and log to DOM
+		player.health = player.health + player.heal();
+		playerHealth.innerHTML = player.health;
+		
+		//increase count
+		player.healCount--;
+
+		//log heal count to DOM
+		playerHealCounter.innerHTML = player.healCount;
+		gameTextDisplay.innerHTML = "You used a heal potion. What now?";
+
+	} else {
+
+		gameTextDisplay.innerHTML = "You have no heals left. Attack or Flee?";
+	}
 }
 
 
@@ -140,4 +154,4 @@ function getRandomInt(min, max) {//Nested into combatLoop
   //The maximum is exclusive and the minimum is inclusive
 }
 
-//})();
+})();

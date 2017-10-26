@@ -30,14 +30,6 @@ var user = {
   }
 }
 
-//var grant = 'Grant Chirpus';
-
-/*
-var grantHealth = 10;
-var userHealth = 40;
-var userWins = 0;
-*/
-
 //Start Game Function
 
 function startGame() {
