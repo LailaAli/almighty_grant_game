@@ -1,6 +1,6 @@
 @charset "UTF-8";
 @import url(font-awesome.min.css);
-@import 'https://fonts.googleapis.com/css?family=Cinzel+Decorative:900|Playfair+Display+SC:900&effect=anaglyph';
+@import 'https://fonts.googleapis.com/css?family=Raleway|Cinzel+Decorative:900|Playfair+Display+SC:900&effect=anaglyph';
 
 
 
@@ -1582,7 +1582,7 @@
 
 	body, input, select, textarea {
 		color: #9a9a9a;
-		font-family:'times';
+		font-family:'raleway';
 		font-size: 14pt;
 		font-weight: 400;
 		line-height: 1.65;
