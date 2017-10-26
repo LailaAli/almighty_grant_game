@@ -1,6 +1,7 @@
 @charset "UTF-8";
 @import url(font-awesome.min.css);
-@import "https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600";
+@import 'https://fonts.googleapis.com/css?family=Cinzel+Decorative:900|Playfair+Display+SC:900&effect=anaglyph';
+
 
 
 /* Reset */
@@ -1581,7 +1582,7 @@
 
 	body, input, select, textarea {
 		color: #9a9a9a;
-		font-family: "Source Sans Pro", Arial, Helvetica, sans-serif;
+		font-family:'times';
 		font-size: 14pt;
 		font-weight: 400;
 		line-height: 1.65;
@@ -2667,7 +2668,7 @@
 
 	#banner {
 		padding: 8em 0 9em 0;
-		background-image: url(../../images/banner.jpg);
+		background-image: url(../../images/banner2.jpg);
 		background-size: cover;
 		background-position: bottom;
 		background-attachment: fixed;
@@ -2693,6 +2694,7 @@
 		}
 
 		#banner h1 {
+			font-family: 'Cinzel Decorative', cursive;
 			font-size: 3.5em;
 			font-weight: 400;
 			color: #fff;
