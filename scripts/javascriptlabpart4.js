@@ -28,17 +28,37 @@ var player = {
     }
 }
 
+var startButton = document.getElementById("startButton");
 var attackButton = document.getElementById("attackButton");
+var healButton = document.getElementById("healButton");
+var fleeButton = document.getElementById("fleeButton");
+
+//START GAME FUNTION
+
+startButton.onclick = function () {
+	startGame();
+}
+
+function startGame () {
+	player.name = prompt('What is your name?');
+	startButton.style.display = "none";
+	attackButton.style.display = "block";
+	healButton.style.display = "block";
+	fleeButton.style.display = "block";
+	gameTextDisplay.innerHTML = "You have entered Grant's dungeon. It will take three stuns to kill him. What will you do?";
+}
+
+
+
+//FUNCTION CALLS WHEN BUTTONS CLICKED
 attackButton.onclick = function() {
 	startCombat("attack");
 };
 
-var healButton = document.getElementById("healButton");
 healButton.onclick = function() {
 	startCombat("heal");
 };
 
-var fleeButton = document.getElementById("fleeButton");
 fleeButton.onclick = function() {
 	startCombat("flee");
 };

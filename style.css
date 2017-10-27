@@ -16,7 +16,8 @@ h1, h2 {
 	font-family: "04B_30";
 }
 
-#attackButton, #healButton, #fleeButton {
+#attackButton, #healButton, #fleeButton, #startButton {
+
 	font-family: "04B_30";
 	font-size: 1.5em;
 	color: black;
@@ -27,16 +28,24 @@ h1, h2 {
 	box-shadow: 0px 3px 0px black;
 }
 
+#startButton {
+	background-color: #2ae800;
+	display: block;
+}
+
 #attackButton {
 	background-color: #01BAEF;
+	display: none;
 }
 
 #healButton {
 	background-color: #EC0868;
+	display: none;
 }
 
 #fleeButton {
 	background-color: #FC2F00;
+	display: none;
 }
 
 #gameTextDisplay {
@@ -50,11 +59,13 @@ h1, h2 {
 
 	font-family: "PressStart2P";
 	border-style: solid;
-	border-color: : white;
 	font-size: 0.9em;
 	line-height: 1.25em;
 	border-radius: 10px;
 	text-align: center;
+
+	background-color: white;
+	box-shadow: inset 0px 0px 10px black;
 }
 
 .statDisplay {
@@ -62,6 +73,12 @@ h1, h2 {
 }
 
 /*Layout*/
+
+.gameContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
 .gameViewConsole {
 	display: flex;
@@ -73,11 +90,38 @@ h1, h2 {
 .buttonContainer {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 40px
+	margin-bottom: 40px;
 }
 
 .statsContainer {
+	width: 480px;
 	display: flex;
 	flex-direction: row;
-	align-items: space-around;
+	justify-content: space-between;
+}
+
+.userStats {
+	font-family: "PressStart2P";
+	font-size: 0.75em;
+	width: 180px;
+	border-style: solid;
+	border-width: 3px;
+	border-radius: 10px;
+	padding: 20px;
+
+	background-color: white;
+	box-shadow: inset 0px 0px 10px black;
+}
+
+.grantStats {
+	font-family: "PressStart2P";
+	font-size: 0.75em;
+	width: 180px;
+	border-style: solid;
+	border-width: 3px;
+	border-radius: 10px;
+	padding: 20px;
+
+	background-color: white;
+	box-shadow: inset 0px 0px 10px black;
 }

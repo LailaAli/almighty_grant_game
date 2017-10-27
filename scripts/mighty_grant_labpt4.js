@@ -103,6 +103,29 @@ function combatLoop() {//Nested into gameLoop
       displayBlock.appendChild(attackLog);
     }
 
+    if (keepPlaying) {
+      if (player.health > 0 && player.wins < 2) { //User Wins Round, Game Continues
+          player.wins++;
+          //console.log (userName + " Stunned Grant Chirpus! His minion used a potion and restored his HP to 10. Keep fighting!");
+          alert (player.name + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-player.wins) + " more time(s) until he is vanquished. Keep fighting!");
+          grant.health = 10;
+          
+        } else if (player.health > 0 && player.wins === 2) { // User Wins Game
+          player.wins++;
+          alert ("Congratulations, you have defeated Grant Chirpus!");
+          //console.log ("Congratulations, you have defeated Grant Chirpus!");
+          keepPlaying = false;
+          
+        } else { //User Health is 0 -> End Game
+          alert ("Grant Chirpus has killed you. Game Over.");
+          //console.log ("Grant Chirpus has killed you. Game Over.");
+          keepPlaying = false;
+        }
+    }
+
+
+    }
+
     /*
     if (grant.health === 10) {
       alert(player.name + ' has ' + player.health + ' HP, and ' + grant.name + " has " + grant.health + " HP! Attack!");
@@ -142,28 +165,28 @@ function combatLoop() {//Nested into gameLoop
 
 // Round End and Check for Win or Loss
 
-function roundEndCheck () {//Nested into gameLoop
+// function roundEndCheck () {//Nested into gameLoop
     
-    if (keepPlaying) {
-      if (player.health > 0 && player.wins < 2) { //User Wins Round, Game Continues
-          player.wins++;
-          //console.log (userName + " Stunned Grant Chirpus! His minion used a potion and restored his HP to 10. Keep fighting!");
-          alert (player.name + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-player.wins) + " more time(s) until he is vanquished. Keep fighting!");
-          grant.health = 10;
+//     if (keepPlaying) {
+//       if (player.health > 0 && player.wins < 2) { //User Wins Round, Game Continues
+//           player.wins++;
+//           //console.log (userName + " Stunned Grant Chirpus! His minion used a potion and restored his HP to 10. Keep fighting!");
+//           alert (player.name + " Stunned Grant Chirpus! His minion uses a potion and restors his HP to 10. You must stun him " + (3-player.wins) + " more time(s) until he is vanquished. Keep fighting!");
+//           grant.health = 10;
           
-        } else if (player.health > 0 && player.wins === 2) { // User Wins Game
-          player.wins++;
-          alert ("Congratulations, you have defeated Grant Chirpus!");
-          //console.log ("Congratulations, you have defeated Grant Chirpus!");
-          keepPlaying = false;
+//         } else if (player.health > 0 && player.wins === 2) { // User Wins Game
+//           player.wins++;
+//           alert ("Congratulations, you have defeated Grant Chirpus!");
+//           //console.log ("Congratulations, you have defeated Grant Chirpus!");
+//           keepPlaying = false;
           
-        } else { //User Health is 0 -> End Game
-          alert ("Grant Chirpus has killed you. Game Over.");
-          //console.log ("Grant Chirpus has killed you. Game Over.");
-          keepPlaying = false;
-        }
-    }
-}
+//         } else { //User Health is 0 -> End Game
+//           alert ("Grant Chirpus has killed you. Game Over.");
+//           //console.log ("Grant Chirpus has killed you. Game Over.");
+//           keepPlaying = false;
+//         }
+//     }
+// }
 
 //Random Number Generator
 
