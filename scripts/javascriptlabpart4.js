@@ -2,49 +2,70 @@
 
 var keepPlaying = true; //Game Kill Switch
 
-var grant = {
-    name: "Grant Chirpus",
-    health: 10,
-    wins: 0,
-    attack() {
-      var attackPower = getRandomInt(1,5);
-      return attackPower;
-    }
-}
+var grant;
+var player;
 
-var player = {
-    name: null,
-    health: 40,
-    lives: 1,
-    healCount: 2,
-    wins: 0,
-    heal() {
-      var healPower = getRandomInt(1,10);
-      return healPower;
-    },
-    attack() {
-      var attackPower = getRandomInt(1,3);
-      return attackPower;
-    }
-}
-
+//define locations
 var startButton = document.getElementById("startButton");
 var attackButton = document.getElementById("attackButton");
 var healButton = document.getElementById("healButton");
 var fleeButton = document.getElementById("fleeButton");
 
+var gameTextDisplay = document.getElementById('gameTextDisplay');
+var grantHealthCounter = document.getElementById("grantHealthCounter");
+var playerRoundsWon = document.getElementById("playerRoundsWon");
+var playerHealthCounter = document.getElementById("playerHealth");
+var playerHealCounter = document.getElementById("playerHealCounter");
+
+
 //START GAME FUNTION
 
-startButton.onclick = function () {
+startButton.onclick = function () {//when start button is clicked
 	startGame();
 }
 
-function startGame () {
-	player.name = prompt('What is your name?');
+function startGame () {//buttons appear, values initialize
+
 	startButton.style.display = "none";
 	attackButton.style.display = "block";
 	healButton.style.display = "block";
 	fleeButton.style.display = "block";
+
+	grant = {//initialize grant
+   		name: "Grant Chirpus",
+    	health: 10,
+    	wins: 0,
+    	attack() {
+      		var attackPower = getRandomInt(1,5);
+      		return attackPower;
+    	}
+    }
+
+    player = {//initialize player
+    	name: null,
+    	health: 40,
+    	lives: 1,
+    	healCount: 2,
+    	wins: 0,
+    	heal() {
+      		var healPower = getRandomInt(1,10);
+      		return healPower;
+    	},
+    	attack() {
+      		var attackPower = getRandomInt(1,3);
+      		return attackPower;
+    	}
+    }
+
+    player.name = prompt('What is your name?');//get username
+
+    //insert initial variables
+    playerHealthCounter.innerHTML = player.health;
+    playerHealth.innerHTML = player.health;
+    grantHealthCounter.innerHTML = grant.health;
+    playerHealCounter.innerHTML = player.healCount;
+    playerRoundsWon.innerHTML = player.wins;
+
 	gameTextDisplay.innerHTML = "You have entered Grant's dungeon. It will take three stuns to kill him. What will you do?";
 }
 
@@ -64,10 +85,6 @@ fleeButton.onclick = function() {
 };
 
 function startCombat(attackHealorRun) {
-
-	var gameTextDisplay = document.getElementById('gameTextDisplay');
-	var grantHealthCounter = document.getElementById("grantHealthCounter");
-    var playerRoundsWon = document.getElementById("playerRoundsWon");
 
 	if (attackHealorRun === "attack") {//If the user clicked attack
       
@@ -113,30 +130,22 @@ function startCombat(attackHealorRun) {
     }
 }
 
-
 function attackRound() {
 
 	// alert("you clicked attack");
 
-	var grantHealthCounter = document.getElementById("grantHealthCounter");
     grant.health = grant.health - player.attack();
     grantHealthCounter.innerHTML = grant.health;
 
-    var playerHealthCounter = document.getElementById("playerHealth");
     player.health = player.health - grant.attack();
     playerHealthCounter.innerHTML = player.health;
 
     gameTextDisplay.innerHTML = "You attacked! Grant Attacked back! What now?";
 }
 
-
 function healRound() {
 
 	if (player.healCount > 0) {
-
-		//define locations
-		var playerHealthCounter = document.getElementById("playerHealth");
-		var playerHealCounter = document.getElementById("playerHealCounter");
 
 		//add health and log to DOM
 		player.health = player.health + player.heal();
@@ -155,15 +164,10 @@ function healRound() {
 	}
 }
 
-
-
 function fleeRound () {
 
-	alert("you clicked run")
+	gameTextDisplay.innerHTML = "You ran away. Grant cackles and chirps as you run. Game Over.";
 }
-
-
-
 
 //Random Number Generator
 

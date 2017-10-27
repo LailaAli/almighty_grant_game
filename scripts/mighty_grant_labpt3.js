@@ -160,3 +160,17 @@ startGame ();
 gameLoop ();
 
 })();
+
+
+
+
+
+var grant = {
+    name: "Grant Chirpus",
+    health: 10,
+    wins: 0,
+    attack() {
+      var attackPower = getRandomInt(1,5);
+      return attackPower;
+    }
+}
